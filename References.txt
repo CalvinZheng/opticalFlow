@@ -1,0 +1,11 @@
+References:
+
+paper:
+
+http://people.csail.mit.edu/bkph/articles/Fixed_Flow.pdf
+http://www.diva-portal.org/smash/get/diva2:273847/FULLTEXT01.pdf
+
+opencv:
+
+http://docs.opencv.org/3.0-beta/modules/video/doc/motion_analysis_and_object_tracking.html
+http://opencv-python-tutroals.readthedocs.org/en/latest/py_tutorials/py_video/py_lucas_kanade/py_lucas_kanade.html
