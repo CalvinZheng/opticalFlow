@@ -20,8 +20,8 @@ Usage:
      - synth:<params> for procedural video
 
 Synth examples:
-    synth:bg=../data/lena.jpg:noise=0.1
-    synth:class=chess:bg=../data/lena.jpg:noise=0.1:size=640x480
+    synth:bg=../cpp/lena.jpg:noise=0.1
+    synth:class=chess:bg=../cpp/lena.jpg:noise=0.1:size=640x480
 
 Keys:
     ESC    - exit
@@ -30,14 +30,9 @@ Keys:
 '''
 
 import numpy as np
-from numpy import pi, sin, cos
-
 import cv2
-
-# built-in modules
 from time import clock
-
-# local modules
+from numpy import pi, sin, cos
 import common
 
 class VideoSynthBase(object):
@@ -105,7 +100,7 @@ class Chess(VideoSynthBase):
         img_quads = cv2.projectPoints(quads.reshape(-1, 3), self.rvec, self.tvec, self.K, self.dist_coef) [0]
         img_quads.shape = quads.shape[:2] + (2,)
         for q in img_quads:
-            cv2.fillConvexPoly(img, np.int32(q*4), color, cv2.LINE_AA, shift=2)
+            cv2.fillConvexPoly(img, np.int32(q*4), color, cv2.CV_AA, shift=2)
 
     def render(self, dst):
         t = self.t
@@ -130,8 +125,8 @@ classes = dict(chess=Chess)
 
 presets = dict(
     empty = 'synth:',
-    lena = 'synth:bg=../data/lena.jpg:noise=0.1',
-    chess = 'synth:class=chess:bg=../data/lena.jpg:noise=0.1:size=640x480'
+    lena = 'synth:bg=../cpp/lena.jpg:noise=0.1',
+    chess = 'synth:class=chess:bg=../cpp/lena.jpg:noise=0.1:size=640x480'
 )
 
 
@@ -140,7 +135,7 @@ def create_capture(source = 0, fallback = presets['chess']):
     '''
     source = str(source).strip()
     chunks = source.split(':')
-    # handle drive letter ('c:', ...)
+    # hanlde drive letter ('c:', ...)
     if len(chunks) > 1 and len(chunks[0]) == 1 and chunks[0].isalpha():
         chunks[1] = chunks[0] + ':' + chunks[1]
         del chunks[0]
@@ -159,8 +154,8 @@ def create_capture(source = 0, fallback = presets['chess']):
         cap = cv2.VideoCapture(source)
         if 'size' in params:
             w, h = map(int, params['size'].split('x'))
-            cap.set(cv2.CAP_PROP_FRAME_WIDTH, w)
-            cap.set(cv2.CAP_PROP_FRAME_HEIGHT, h)
+            cap.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, w)
+            cap.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, h)
     if cap is None or not cap.isOpened():
         print 'Warning: unable to open video source: ', source
         if fallback is not None:

@@ -1,16 +1,14 @@
 #!/usr/bin/env python
 
 '''
-This module contains some common routines used by other samples.
+This module contais some common routines used by other samples.
 '''
 
 import numpy as np
 import cv2
-
-# built-in modules
 import os
-import itertools as it
 from contextlib import contextmanager
+import itertools as it
 
 image_extensions = ['.bmp', '.jpg', '.jpeg', '.png', '.tif', '.tiff', '.pbm', '.pgm', '.ppm']
 
@@ -91,15 +89,14 @@ class Sketcher:
         pt = (x, y)
         if event == cv2.EVENT_LBUTTONDOWN:
             self.prev_pt = pt
-        elif event == cv2.EVENT_LBUTTONUP:
-            self.prev_pt = None
-
         if self.prev_pt and flags & cv2.EVENT_FLAG_LBUTTON:
             for dst, color in zip(self.dests, self.colors_func()):
                 cv2.line(dst, self.prev_pt, pt, color, 5)
             self.dirty = True
             self.prev_pt = pt
             self.show()
+        else:
+            self.prev_pt = None
 
 
 # palette data from matplotlib/_cm.py
