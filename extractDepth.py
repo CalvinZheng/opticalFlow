@@ -6,7 +6,7 @@ import video
 import PIL.Image as Image
 
 help_message = '''
-USAGE: opt_flow.py [<video_source>] [<int>f]
+USAGE: extractDepth.py [<video_source>] [<int>f]
 
 will output depth map calculated using f-th frame
 '''
@@ -17,7 +17,7 @@ if __name__ == '__main__':
     try: fn = sys.argv[1]
     except: fn = 0
     try: skip = int(sys.argv[2])
-    except: skip = 0
+    except: skip = 100
 
     cam = video.create_capture(fn)
     for i in range(0,skip):
