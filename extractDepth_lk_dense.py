@@ -48,15 +48,16 @@ class App:
         (h, w) = frame.shape
         for i in range(0, h):
             for j in range(0, w):
-                features = np.append(features, [i,j])
+                features = np.append(features, [j,i])
         features.shape = (-1,1,2)
+        features = features.astype('float32')
         (c,x,y) = features.shape
         
         p1, st, err = cv2.calcOpticalFlowPyrLK(frame, frame2, features, None, **lk_params)
         output = np.zeros_like(frame)
         output = output.astype('float64')
         for i in range(0,c):
-            output[features[i,0,0], features[i,0,1]] = ((p1-features)[i,0,0]**2+(p1-features)[i,0,1]**2)**0.5
+            output[features[i,0,1], features[i,0,0]] = ((p1-features)[i,0,0]**2+(p1-features)[i,0,1]**2)**0.5
         im = Image.fromarray(np.uint8(output*255/output.max()), mode='L')
         im.show()
 
