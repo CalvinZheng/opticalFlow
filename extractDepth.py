@@ -30,6 +30,11 @@ if __name__ == '__main__':
     ret, img = cam.read()
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     flow = cv2.calcOpticalFlowFarneback(prevgray, gray, 0.5, 3, 15, 3, 5, 1.2, 0)
+    flow[:,:,0]=0
+    #print flow.shape
+    #print flow[10:12,10:12,0]
+    #print flow[10:12,10:12,1]
     magFlow = (np.sum(flow**2, axis=2))**0.5
+    #print magFlow.shape
     im = Image.fromarray(np.uint8(magFlow*255/magFlow.max()), mode="L")
     im.show()

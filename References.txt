@@ -10,3 +10,10 @@ opencv:
 http://docs.opencv.org/3.0-beta/modules/video/doc/motion_analysis_and_object_tracking.html
 http://opencv-python-tutroals.readthedocs.org/en/latest/py_tutorials/py_video/py_lucas_kanade/py_lucas_kanade.html
 http://www.caam.rice.edu/~zhang/caam699/opt-flow/horn81.pdf
+
+Previous work on 3D reconstruction:
+
+LIDAR - light detection and ranging - uses pulsed laser to measure ranges (variable distances). Requires existing ground plans as well.	
+
+Nice summary of current 3D reconstruction methods and issues:
+http://www.sciencedirect.com/science/article/pii/S030324340400087X

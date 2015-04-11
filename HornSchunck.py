@@ -17,9 +17,9 @@ while(cap.isOpened()):
     abs_sobely = np.absolute(sobely)
     sobel_8u = np.uint8(abs_sobely)
     gradient_y=np.gradient(gray)
-    print gray[20:25,10:15]
-    print sobely[20:25,10:15]
-    cv2.imshow('frame',sobel_8u)
+
+    cv2.imshow('frame',sobely)
+    print sobely[10:20,10:20]
     if cv2.waitKey(1) & 0xFF == ord('q'):
          break
 
