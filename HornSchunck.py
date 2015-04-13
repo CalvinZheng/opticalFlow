@@ -18,13 +18,18 @@ while(cap.isOpened()):
     sobely = cv2.Sobel(gray,cv2.CV_64F,0,1,ksize=-1)
     time_grad=gray-prevgray
     vy=-time_grad/sobely
+    vy[np.isnan(vy)]=0
+    vy[np.isinf(vy)]=255
+    print np.min(vy),np.max(vy)
+    vy_scale=(vy+np.min(vy))*255/np.max(vy)
+    
     #abs_sobely = np.absolute(sobely)
     #sobel_8u = np.uint8(abs_sobely)
     #gradient_y=np.gradient(gray)
 
     #cv2.imshow('frame',sobely)
     #cv2.imshow('frame',time_grad)
-    cv2.imshow('frame',vy)
+    cv2.imshow('frame',vy_scale)
     #print sobely[10:20,10:20]
     if cv2.waitKey(1) & 0xFF == ord('q'):
          break
